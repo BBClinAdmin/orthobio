@@ -33,8 +33,14 @@
     resetBooking();
   }
 
+  var BOOKING_URL = "https://calendar.app.google/BLScJ9n2y4whGwgHA";
   document.querySelectorAll("[data-book]").forEach(function (el) {
-    el.addEventListener("click", function (e) { e.preventDefault(); openBooking(); });
+    // Make anchors behave like real links (open in new tab); keep buttons accessible.
+    if (el.tagName === "A") { el.setAttribute("href", BOOKING_URL); el.setAttribute("target", "_blank"); el.setAttribute("rel", "noopener"); }
+    el.addEventListener("click", function (e) {
+      e.preventDefault();
+      window.open(BOOKING_URL, "_blank", "noopener");
+    });
   });
   document.querySelectorAll("[data-close]").forEach(function (el) {
     el.addEventListener("click", function (e) { e.preventDefault(); closeBooking(); });
