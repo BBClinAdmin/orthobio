@@ -1,4 +1,6 @@
+# STAGING ONLY — this GitHub Pages site is a staging/preview host, not production.
+# Block all crawlers so the staging copy is never indexed under the wrong domain.
+# AT LAUNCH (on the real production domain): replace this with an allow-all rule and
+# a Sitemap: line pointing at the production sitemap.xml.
 User-agent: *
-Allow: /
-
-Sitemap: https://bbclinadmin.github.io/orthobio/sitemap.xml
+Disallow: /
