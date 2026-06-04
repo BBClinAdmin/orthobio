@@ -315,12 +315,32 @@ body.menu-open{overflow:hidden}
 .ledger .lrow{display:grid;grid-template-columns:1fr auto;gap:16px 24px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--border)}
 .ledger .lrow:last-child{border-bottom:0}
 .ledger .ll{font-size:15.5px;font-weight:600;color:var(--ink-900)}
-.ledger .lsub{display:block;font-size:13.5px;font-weight:400;color:var(--fg-muted);margin-top:5px;line-height:1.5;max-width:54ch}
+.ledger .lt{display:inline-flex;align-items:center;gap:7px}
+.ledger .lchev{width:15px;height:15px;color:var(--fg-subtle);transition:transform .3s ease,color .2s ease;flex:none}
+.ledger .lrow{cursor:pointer}
+.ledger .lrow:hover .lt,.ledger .lrow:focus-within .lt{color:var(--accent-strong)}
+.ledger .lrow:hover .lchev,.ledger .lrow:focus-within .lchev{transform:rotate(180deg);color:var(--accent-strong)}
+.ledger .lrow:focus{outline:none}
+.ledger .lrow:focus-visible{outline:2px solid var(--ring);outline-offset:4px;border-radius:6px}
+.ledger .lsub{display:block;font-size:13.5px;font-weight:400;color:var(--fg-muted);line-height:1.5;max-width:54ch;max-height:0;opacity:0;overflow:hidden;margin-top:0;transition:max-height .35s ease,opacity .25s ease,margin-top .3s ease}
+.ledger .lrow:hover .lsub,.ledger .lrow:focus-within .lsub{max-height:280px;opacity:1;margin-top:9px}
+.ledger .lsub .linc{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+.ledger .lsub .linc li{position:relative;padding-left:16px;font-size:13.5px;color:var(--fg-muted);line-height:1.45}
+.ledger .lsub .linc li::before{content:"";position:absolute;left:2px;top:7px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.ledger .lsub .lsub-lead{font-size:13px;color:var(--fg-subtle);font-weight:500;margin:0 0 7px}
+.ledger .lsub .lsub-note{font-size:12.5px;color:var(--fg-subtle);line-height:1.45;margin:9px 0 0}
+.ledger.is-aside .lsub .linc li::before{background:var(--fg-subtle)}
 .ledger .lv{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-weight:500;font-size:18px;color:var(--ink-800);white-space:nowrap;text-align:right}
 /* soft placeholder where a fixed price would sit — signals "scoped, not sticker-priced" */
 .ledger .lvary{justify-self:end;align-self:center;display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-subtle);background:var(--n-50);border:1px solid var(--border);border-radius:999px;padding:6px 13px;white-space:nowrap}
 .ledger .lvary svg{width:13px;height:13px;color:var(--fg-subtle)}
 @media(max-width:560px){.ledger .lrow{grid-template-columns:1fr;gap:8px}.ledger .lv{text-align:left}.ledger .lvary{justify-self:start}}
+/* group: "what we provide" (base+procedure) sit together; equipment stands apart */
+.invest-stack{display:flex;flex-direction:column;gap:16px}
+.ledger-cap{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--fg-subtle);padding:14px 0 12px;margin-bottom:0;border-bottom:1px solid var(--border)}
+.ledger-cap svg{width:14px;height:14px;color:var(--accent-strong)}
+.ledger.is-aside{background:var(--bone);border-color:var(--border-strong)}
+.ledger.is-aside .ledger-cap svg{color:var(--fg-subtle)}
 
 /* "every clinic is different" callout — replaces the cost total, carries the first-step CTA */
 .cost-vary{margin-top:26px;display:grid;grid-template-columns:1fr auto;gap:28px 40px;align-items:center;background:var(--ink-900);border-radius:18px;padding:34px 40px;color:#fff}
