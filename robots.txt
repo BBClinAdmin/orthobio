@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bbclinadmin.github.io/orthobio/sitemap.xml
