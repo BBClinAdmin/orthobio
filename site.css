@@ -73,6 +73,14 @@ body.menu-open{overflow:hidden}
 .phero.on-ink h1{color:#fff}
 .phero .psub{font-size:1.2rem;line-height:1.55;color:var(--fg-muted);margin:20px 0 0;max-width:54ch}
 .phero.on-ink .psub{color:var(--fg-on-ink-mut)}
+.phero.on-ink .psub strong{color:#fff}
+/* byline reads on the dark hero */
+.phero.on-ink .byline{border-top-color:var(--border-ink)}
+.phero.on-ink .byline .bl-avs img{border-color:var(--ink-900)}
+.phero.on-ink .byline .bl-by{color:var(--fg-on-ink-mut)}
+.phero.on-ink .byline .bl-name{color:var(--fg-on-ink)}
+.phero.on-ink .byline .bl-name strong{color:#fff}
+.phero.on-ink .byline .bl-name .bl-cred{color:var(--fg-on-ink-mut)}
 .phero-grid{display:grid;grid-template-columns:1fr;gap:0}
 
 /* ---- Generic section helpers ----------------------------------------- */

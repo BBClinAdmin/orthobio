@@ -15,12 +15,18 @@
   function wireBooking() {
     document.querySelectorAll("[data-book]").forEach(function (el) {
       if (el.tagName === "A") {
+        // Let the browser handle anchors natively — most reliable way to get a
+        // real new tab. (Overriding with window.open gets blocked inside
+        // sandboxed/preview frames, which makes Google Calendar load in-frame
+        // and fail with ERR_BLOCKED_BY_RESPONSE.)
         el.setAttribute("href", BOOKING_URL);
         el.setAttribute("target", "_blank");
         el.setAttribute("rel", "noopener");
+        return;
       }
-      el.addEventListener("click", function (e) {
-        e.preventDefault();
+      // Non-anchor elements (e.g. <button>): fall back to window.open.
+      el.style.cursor = "pointer";
+      el.addEventListener("click", function () {
         window.open(BOOKING_URL, "_blank", "noopener");
       });
     });

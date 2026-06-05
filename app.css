@@ -333,6 +333,11 @@ section{scroll-margin-top:90px}
 .svc-top h3{margin:0}
 .svc h3{font-family:var(--font-display);font-weight:500;font-size:19px;margin:0 0 7px;color:var(--ink-900)}
 .svc p{margin:0;font-size:14px;line-height:1.55;color:var(--fg-muted)}
+.sop-cols{margin:12px 0 0;padding:0;list-style:none;columns:2;column-gap:24px;font-size:13.5px;line-height:1.45;color:var(--fg-muted)}
+.sop-cols li{break-inside:avoid;position:relative;padding-left:15px;margin-bottom:7px}
+.sop-cols li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:var(--accent-strong)}
+.svc p.sop-note{margin-top:13px;font-size:13.5px}
+@media(max-width:600px){.sop-cols{columns:1}}
 @media(max-width:900px){.svc-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.svc-grid,.svc-grid.two{grid-template-columns:1fr}}
 
