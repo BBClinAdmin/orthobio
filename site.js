@@ -74,10 +74,41 @@
     bars.forEach(function (b) { io.observe(b); });
   }
 
+  // ---- Animate payback bars (height) when scrolled into view ----
+  function wirePaybackBars() {
+    var bars = document.querySelectorAll(".pbar[data-h]");
+    if (!bars.length) return;
+    function px(b) {
+      var col = b.parentNode;
+      var pct = parseFloat(b.getAttribute("data-h")) || 0;
+      return Math.round((col.clientHeight * pct) / 100) + "px";
+    }
+    function grow(b) { b.style.height = px(b); }
+    // keep bar pixel heights correct on resize (track height changes at breakpoints)
+    window.addEventListener("resize", function () {
+      bars.forEach(function (b) { if (b.dataset.grown) b.style.height = px(b); });
+    });
+    if (!("IntersectionObserver" in window)) {
+      bars.forEach(function (b) { grow(b); b.dataset.grown = "1"; });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          grow(en.target);
+          en.target.dataset.grown = "1";
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.35 });
+    bars.forEach(function (b) { io.observe(b); });
+  }
+
   function init() {
     wireBooking();
     wireMobileNav();
     wireRevenueBars();
+    wirePaybackBars();
   }
   if (document.readyState !== "loading") init();
   else document.addEventListener("DOMContentLoaded", init);
