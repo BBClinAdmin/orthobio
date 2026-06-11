@@ -125,16 +125,18 @@ body.menu-open{overflow:hidden}
 .home-phases .ph-list svg{flex:none;margin-top:2px;color:var(--vital-600);width:15px;height:15px}
 @media(max-width:680px){.home-phases{grid-template-columns:1fr}}
 
-/* Opportunity teaser: headline number beside a compact breakdown */
-.opp-teaser{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-.opp-teaser .ot-num{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-weight:500;font-size:clamp(3rem,2rem + 4vw,5rem);line-height:1;letter-spacing:-.03em;color:var(--plasma-400)}
-.opp-teaser .ot-num-lab{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-on-ink-mut);margin-top:14px}
-.opp-rows{display:flex;flex-direction:column;gap:0;background:rgba(255,255,255,.04);border:1px solid var(--border-ink);border-radius:14px;padding:6px 22px}
-.opp-rows .orow{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:15px 0;border-bottom:1px solid var(--border-ink);font-size:14.5px;color:var(--fg-on-ink)}
-.opp-rows .orow:last-child{border-bottom:0}
-.opp-rows .orow .ol{color:var(--fg-on-ink-mut)}
-.opp-rows .orow .ov{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-weight:500;color:#fff}
-@media(max-width:820px){.opp-teaser{grid-template-columns:1fr;gap:30px}}
+/* Opportunity teaser: margin pillars (margin-first, no published prices) */
+.payteaser{margin-top:40px}
+.pt-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.ptp{background:rgba(255,255,255,.035);border:1px solid var(--border-ink);border-radius:14px;padding:26px 24px}
+.ptp > i{display:block;width:26px;height:26px;color:var(--plasma-300);margin-bottom:16px}
+.ptp .ptp-t{font-size:18px;font-weight:600;color:#fff;margin-bottom:7px}
+.ptp .ptp-d{font-size:14px;line-height:1.55;color:var(--fg-on-ink-mut);margin:0;text-wrap:pretty}
+.pt-foot{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:34px}
+.pt-foot .pt-disc{font-size:12px;line-height:1.5;color:var(--fg-on-ink-mut);opacity:.78;max-width:46ch}
+@media(max-width:820px){
+  .pt-pillars{grid-template-columns:1fr;gap:14px}
+}
 
 /* ---- Photo placeholders (until real photos provided) ----------------- */
 /* ---- The Challenge: barrier cards with a 'how we close it' line ------- */
