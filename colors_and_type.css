@@ -1,0 +1,245 @@
+/* ============================================================================
+   OrthoBio Consulting — Foundations: Color + Type
+   "Ink & Plasma" system
+   ----------------------------------------------------------------------------
+   - Ink navy   = authority, evidence, trust (primary brand + text)
+   - Plasma amber = the warm, living accent (the golden PRP/plasma layer)
+   - Vital teal  = regeneration / clinical, used sparingly
+   - Warm bone/paper neutrals = premium, human, not stark-clinical
+   Fonts (Google Fonts): Source Serif 4 (display serif), Libre Franklin (sans),
+   DM Mono (data/labels). Load via:
+   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Libre+Franklin:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+   ========================================================================== */
+
+:root {
+  /* ---- Color primitives ------------------------------------------------- */
+
+  /* Ink — primary brand navy / text anchor */
+  --ink-950: #0a1726;
+  --ink-900: #0f2336;
+  --ink-800: #173047;
+  --ink-700: #21425d;
+  --ink-600: #305777;
+  --ink-500: #436f91;
+  --ink-400: #6d93af;
+
+  /* Plasma — warm amber accent (the golden plasma layer) */
+  --plasma-700: #97601a;
+  --plasma-600: #b5731f;
+  --plasma-500: #cf8a2b;   /* primary accent */
+  --plasma-400: #e0a24a;
+  --plasma-300: #edbe7f;
+  --plasma-200: #f6dcb3;
+  --plasma-100: #faecd5;
+  --plasma-50:  #fcf6ea;
+
+  /* Vital — regenerative teal-green (supporting, used sparingly) */
+  --vital-700: #195a4a;
+  --vital-600: #1f6f5c;
+  --vital-500: #2a8a72;
+  --vital-100: #dcefe9;
+  --vital-50:  #eef7f3;
+
+  /* Warm neutrals — bone / paper */
+  --white:  #ffffff;
+  --paper:  #f6f7f9;   /* default page background — cool neutral */
+  --bone:   #eceff3;   /* deeper cool surface (legacy name) */
+  --n-50:   #f1f3f6;
+  --n-100:  #e6e9ee;
+  --n-200:  #d6dbe2;
+  --n-300:  #bcc3cd;
+  --n-400:  #97a0ac;
+  --n-500:  #6c757f;
+  --n-600:  #4c545d;
+  --n-700:  #333a42;
+  --n-800:  #20262c;
+
+  /* Cool slate (secondary text on light, keeps clinical edge) */
+  --slate-600: #4e5d6b;
+  --slate-500: #687784;
+
+  /* Semantic status */
+  --success: #1f7a52;
+  --success-bg: #e4f3ea;
+  --warning: #b5731f;
+  --warning-bg: #faecd5;
+  --danger:  #b23b2e;
+  --danger-bg: #f7e4e1;
+  --info:    #305777;
+  --info-bg: #e6eef4;
+
+  /* ---- Semantic tokens (use THESE in components) ----------------------- */
+  --bg:            var(--paper);
+  --bg-elev:       var(--white);
+  --surface:       var(--white);
+  --surface-bone:  var(--bone);
+  --surface-ink:   var(--ink-900);   /* dark sections */
+
+  --fg:            var(--ink-900);   /* primary text */
+  --fg-muted:      var(--slate-600); /* secondary text */
+  --fg-subtle:     var(--n-500);     /* tertiary / captions */
+  --fg-on-ink:     #eaf0f5;          /* text on ink surfaces */
+  --fg-on-ink-mut: #9fb2c2;
+
+  --brand:         var(--ink-900);
+  --brand-fg:      var(--white);
+  --accent:        var(--plasma-500);
+  --accent-strong: var(--plasma-600);
+  --accent-fg:     var(--ink-950);   /* text on amber */
+  --accent-wash:   var(--plasma-100);
+
+  --border:        var(--n-200);     /* hairline dividers / card borders */
+  --border-strong: var(--n-300);
+  --border-ink:    rgba(255,255,255,0.14);
+  --ring:          color-mix(in oklch, var(--plasma-500) 55%, transparent);
+
+  /* ---- Type families ---------------------------------------------------- */
+  --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-sans:    "Libre Franklin", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* ---- Type scale (fluid; tuned for editorial authority) ---------------- */
+  --fs-display: clamp(2.85rem, 1.6rem + 5.4vw, 5rem);   /* @kind other */ /* hero serif */
+  --fs-h1:      clamp(2.25rem, 1.4rem + 3.4vw, 3.5rem); /* @kind other */
+  --fs-h2:      clamp(1.75rem, 1.2rem + 2.1vw, 2.5rem); /* @kind other */
+  --fs-h3:      clamp(1.35rem, 1.05rem + 1.1vw, 1.75rem); /* @kind other */
+  --fs-h4:      1.25rem;
+  --fs-lead:    clamp(1.15rem, 1.02rem + 0.5vw, 1.375rem); /* @kind other */ /* intro paragraph */
+  --fs-body:    1.0625rem;   /* 17px base body */
+  --fs-sm:      0.9375rem;
+  --fs-xs:      0.8125rem;
+  --fs-eyebrow: 0.75rem;     /* mono eyebrow / kicker */
+
+  --lh-tight:   1.08; /* @kind other */
+  --lh-snug:    1.22; /* @kind other */
+  --lh-body:    1.62; /* @kind other */
+  --lh-relaxed: 1.7; /* @kind other */
+
+  --tracking-eyebrow: 0.16em;
+  --tracking-tight:   -0.02em;
+  --tracking-normal:  0;
+
+  /* ---- Radii ------------------------------------------------------------ */
+  --r-xs: 4px;
+  --r-sm: 7px;
+  --r-md: 11px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-pill: 999px;
+
+  /* ---- Spacing scale (4px base) ----------------------------------------- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  --sp-10: 128px;
+
+  /* ---- Elevation (soft, warm-tinted; restrained) ----------------------- */
+  --shadow-xs: 0 1px 2px rgba(15, 35, 54, 0.06);
+  --shadow-sm: 0 1px 3px rgba(15, 35, 54, 0.07), 0 1px 2px rgba(15, 35, 54, 0.05);
+  --shadow-md: 0 6px 16px -6px rgba(15, 35, 54, 0.14), 0 2px 6px -2px rgba(15, 35, 54, 0.08);
+  --shadow-lg: 0 18px 40px -12px rgba(15, 35, 54, 0.20), 0 6px 14px -8px rgba(15, 35, 54, 0.10);
+  --shadow-focus: 0 0 0 3px var(--ring);
+}
+
+/* ============================================================================
+   Base element styles — semantic, ready to use
+   ========================================================================== */
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display & headings use the serif */
+.display, h1.display {
+  font-family: var(--font-display);
+  font-size: var(--fs-display);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  font-weight: 600;
+  color: var(--fg);
+  text-wrap: balance;
+}
+
+h1, .h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+  font-weight: 600;
+  text-wrap: balance;
+}
+h2, .h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+  font-weight: 600;
+  text-wrap: balance;
+}
+h3, .h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  line-height: 1.3;
+  font-weight: 500;
+}
+h4, .h4 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h4);
+  line-height: 1.35;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.lead {
+  font-size: var(--fs-lead);
+  line-height: var(--lh-relaxed);
+  color: var(--fg-muted);
+  font-weight: 400;
+}
+
+p, .body {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--fg);
+  text-wrap: pretty;
+}
+
+small, .text-sm { font-size: var(--fs-sm); }
+.text-xs { font-size: var(--fs-xs); }
+
+.muted   { color: var(--fg-muted); }
+.subtle  { color: var(--fg-subtle); }
+
+/* Eyebrow / kicker — mono, all-caps, tracked. A signature device. */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--accent-strong);
+}
+
+/* Data / figures — tabular mono for prices, stats, tables */
+.data, .figure {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+a { color: var(--ink-700); text-underline-offset: 0.18em; }
+a:hover { color: var(--accent-strong); }
+
+::selection { background: var(--plasma-200); color: var(--ink-950); }

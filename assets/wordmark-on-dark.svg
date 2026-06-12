@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760.1" height="159.1" viewBox="0 0 760.1 159.1" fill="none" role="img" aria-label="Orthobio Partners">
+  <defs></defs>
+  <g transform="translate(0 10) scale(2.17375)">
+    <ellipse cx="32" cy="32" rx="29" ry="12.5" transform="rotate(-29 32 32)" stroke="#6d93af" stroke-width="2.4"></ellipse>
+    <circle cx="32" cy="32" r="12.5" fill="#0f2336" stroke="#eaf0f5" stroke-width="3"></circle>
+    <circle cx="32" cy="32" r="6.2" fill="#e0a24a"></circle>
+  </g>
+  <text x="180.88" y="106.88" font-family="OrthobioWM, &#39;Source Serif 4&#39;, Georgia, serif" font-weight="500" font-size="80" letter-spacing="-1.6"><tspan fill="#f6f7f9">Orthobio </tspan><tspan fill="#e0a24a">Partners</tspan></text>
+</svg>
