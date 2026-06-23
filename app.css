@@ -23,15 +23,15 @@
   --ink-500: #436f91;
   --ink-400: #6d93af;
 
-  /* Plasma — warm amber accent (the golden plasma layer) */
-  --plasma-700: #97601a;
-  --plasma-600: #b5731f;
-  --plasma-500: #cf8a2b;   /* primary accent */
-  --plasma-400: #e0a24a;
-  --plasma-300: #edbe7f;
-  --plasma-200: #f6dcb3;
-  --plasma-100: #faecd5;
-  --plasma-50:  #fcf6ea;
+  /* Plasma — brand blue/cyan accent (matches the Boulder Biologics Partners logo) */
+  --plasma-700: #0a5499;
+  --plasma-600: #0c6dcb;
+  --plasma-500: #1488e8;   /* primary accent */
+  --plasma-400: #2f9bef;
+  --plasma-300: #79bff6;
+  --plasma-200: #bbdffb;
+  --plasma-100: #dceffd;
+  --plasma-50:  #eef7fe;
 
   /* Vital — regenerative teal-green (supporting, used sparingly) */
   --vital-700: #195a4a;
@@ -255,8 +255,8 @@ img{display:block;max-width:100%}
 .btn:active{transform:translateY(1px)}
 .btn-primary{background:var(--ink-900);color:#fff}
 .btn-primary:hover{background:#0a1b2c}
-.btn-accent{background:var(--plasma-500);color:var(--ink-950)}
-.btn-accent:hover{background:var(--plasma-600)}
+.btn-accent{background:var(--plasma-600);color:#fff}
+.btn-accent:hover{background:var(--plasma-700)}
 .btn-outline{background:transparent;color:var(--ink-900);border-color:var(--border-strong)}
 .btn-outline:hover{border-color:var(--ink-700);background:#fff}
 .btn-ghost{background:transparent;color:#fff;padding:13px 6px}
@@ -343,11 +343,11 @@ section{scroll-margin-top:90px}
 
 /* phase labels + lead card + continuation gate */
 .phase-head{display:flex;align-items:baseline;gap:14px;margin-bottom:16px;flex-wrap:wrap}
-.phase-head .pl{font-family:var(--font-mono);font-size:11.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-950);background:var(--plasma-500);padding:5px 11px;border-radius:999px;white-space:nowrap}
+.phase-head .pl{font-family:var(--font-mono);font-size:11.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--plasma-600);padding:5px 11px;border-radius:999px;white-space:nowrap}
 .phase-head .pm{font-size:14.5px;font-weight:700;color:var(--fg)}
 .svc-lead{background:var(--ink-900);color:#fff;border-radius:14px;padding:28px 30px;display:flex;justify-content:space-between;align-items:center;gap:34px;box-shadow:var(--shadow-md)}
 .svc-lead .ix{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;color:var(--plasma-400)}
-.svc-lead .ic{width:40px;height:40px;border-radius:9px;background:rgba(224,162,74,.16);display:flex;align-items:center;justify-content:center;color:var(--plasma-300);flex:none}
+.svc-lead .ic{width:40px;height:40px;border-radius:9px;background:rgba(47,155,239,.16);display:flex;align-items:center;justify-content:center;color:var(--plasma-300);flex:none}
 .svc-lead .svc-top{margin:14px 0 12px}
 .svc-lead h3{font-family:var(--font-display);font-weight:500;font-size:22px;margin:0;color:#fff}
 .svc-lead p{margin:0;font-size:14.5px;line-height:1.55;color:var(--fg-on-ink-mut);max-width:54ch}

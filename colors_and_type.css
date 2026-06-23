@@ -1,9 +1,9 @@
 /* ============================================================================
    Boulder Biologics Partners — Foundations: Color + Type
-   "Ink & Plasma" system
+   "Ink & Plasma" system (Plasma = brand blue/cyan)
    ----------------------------------------------------------------------------
    - Ink navy   = authority, evidence, trust (primary brand + text)
-   - Plasma amber = the warm, living accent (the golden PRP/plasma layer)
+   - Plasma blue/cyan = the brand accent (matches the logo mark)
    - Vital teal  = regeneration / clinical, used sparingly
    - Warm bone/paper neutrals = premium, human, not stark-clinical
    Fonts (Google Fonts): Source Serif 4 (display serif), Libre Franklin (sans),
@@ -23,15 +23,15 @@
   --ink-500: #436f91;
   --ink-400: #6d93af;
 
-  /* Plasma — warm amber accent (the golden plasma layer) */
-  --plasma-700: #97601a;
-  --plasma-600: #b5731f;
-  --plasma-500: #cf8a2b;   /* primary accent */
-  --plasma-400: #e0a24a;
-  --plasma-300: #edbe7f;
-  --plasma-200: #f6dcb3;
-  --plasma-100: #faecd5;
-  --plasma-50:  #fcf6ea;
+  /* Plasma — brand blue/cyan accent (matches the Boulder Biologics Partners logo) */
+  --plasma-700: #0a5499;
+  --plasma-600: #0c6dcb;
+  --plasma-500: #1488e8;   /* primary accent */
+  --plasma-400: #2f9bef;
+  --plasma-300: #79bff6;
+  --plasma-200: #bbdffb;
+  --plasma-100: #dceffd;
+  --plasma-50:  #eef7fe;
 
   /* Vital — regenerative teal-green (supporting, used sparingly) */
   --vital-700: #195a4a;
