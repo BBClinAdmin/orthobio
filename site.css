@@ -44,6 +44,8 @@ body.menu-open{overflow:hidden}
 .hero.hero-ink h1{color:#fff}
 .hero.hero-ink .lead{color:var(--fg-on-ink)}
 .hero.hero-ink .hero-note{color:var(--fg-on-ink-mut)}
+.hero.hero-ink .hero-note a{color:var(--plasma-300);font-weight:600;text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px}
+.hero.hero-ink .hero-note a:hover{color:#fff}
 .hero.hero-ink .btn-outline{color:#fff;border-color:var(--border-ink)}
 .hero.hero-ink .btn-outline:hover{border-color:rgba(255,255,255,.42);background:rgba(255,255,255,.06)}
 .hero.hero-ink .proof{background:var(--ink-800);border:1px solid var(--border-ink)}
