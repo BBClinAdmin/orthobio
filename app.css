@@ -1,5 +1,5 @@
 /* ============================================================================
-   OrthoBio Consulting — Foundations: Color + Type
+   Boulder Biologics Partners — Foundations: Color + Type
    "Ink & Plasma" system
    ----------------------------------------------------------------------------
    - Ink navy   = authority, evidence, trust (primary brand + text)
@@ -244,7 +244,7 @@ a:hover { color: var(--accent-strong); }
 
 ::selection { background: var(--plasma-200); color: var(--ink-950); }
 
-/* OrthoBio Consulting — Marketing site kit styles. Tokens come from ../../colors_and_type.css */
+/* Boulder Biologics Partners — Marketing site kit styles. Tokens come from ../../colors_and_type.css */
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}

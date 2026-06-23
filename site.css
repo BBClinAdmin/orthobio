@@ -1,10 +1,13 @@
 /* ============================================================================
-   OrthoBio Partners — Multi-page additions (layered on top of app.css)
+   Boulder Biologics Partners — Multi-page additions (layered on top of app.css)
    Shared chrome, interior page heroes, expanded sections, mobile nav.
    ========================================================================== */
 
 /* ---- Header: active state + mobile menu ------------------------------- */
 .brand .wm{white-space:nowrap}
+.brand .brand-logo{height:60px;width:auto;display:block}
+.brand .wm,.brand .sub{display:none}
+.ftr .ftr-logo{height:30px;width:auto;display:block;margin-bottom:6px}
 .hdr .wrap{max-width:1320px}
 .hdr-in{gap:24px}
 .brand{flex:0 0 auto}
