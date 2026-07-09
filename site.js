@@ -1,6 +1,6 @@
 /* Boulder Biologics Partners — shared multi-page behavior (no framework). */
 (function () {
-  var BOOKING_URL = "https://calendar.app.google/BLScJ9n2y4whGwgHA";
+  var BOOKING_URL = "https://calendar.app.google/zTkZoBrUXyc5ng3PA";
 
   // ---- Lucide icons ----
   function drawIcons() {
