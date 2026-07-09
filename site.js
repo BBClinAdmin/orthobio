@@ -1,4 +1,4 @@
-/* Orthobio Partners — shared multi-page behavior (no framework). */
+/* Boulder Biologics Partners — shared multi-page behavior (no framework). */
 (function () {
   var BOOKING_URL = "https://calendar.app.google/BLScJ9n2y4whGwgHA";
 

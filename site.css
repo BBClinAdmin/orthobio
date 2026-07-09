@@ -28,12 +28,12 @@
 body.menu-open{overflow:hidden}
 
 /* Tighten link spacing as the viewport narrows, before collapsing to the menu */
-@media(max-width:1240px){
-  .nav{gap:16px}
+@media(max-width:1340px){
+  .nav{gap:15px}
   .nav a.navlink{font-size:13.5px}
 }
 
-@media(max-width:1160px){
+@media(max-width:1280px){
   .nav .navlink{display:none}
   .nav .btn-accent{display:none}
   .nav-toggle{display:inline-flex}
@@ -44,6 +44,8 @@ body.menu-open{overflow:hidden}
 .hero.hero-ink h1{color:#fff}
 .hero.hero-ink .lead{color:var(--fg-on-ink)}
 .hero.hero-ink .hero-note{color:var(--fg-on-ink-mut)}
+.hero.hero-ink .hero-note a{color:var(--plasma-300);font-weight:600;text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px}
+.hero.hero-ink .hero-note a:hover{color:#fff}
 .hero.hero-ink .btn-outline{color:#fff;border-color:var(--border-ink)}
 .hero.hero-ink .btn-outline:hover{border-color:rgba(255,255,255,.42);background:rgba(255,255,255,.06)}
 .hero.hero-ink .proof{background:var(--ink-800);border:1px solid var(--border-ink)}
@@ -485,3 +487,175 @@ body.menu-open{overflow:hidden}
 .gblock .gd svg{width:16px;height:16px;transition:transform .16s ease}
 .gblock .gd:hover svg{transform:translateX(3px)}
 @media(max-width:560px){.gblock{grid-template-columns:1fr;gap:14px}}
+
+/* ============================================================================
+   Contact page — enquiry form + direct calendar booking
+   ========================================================================== */
+.contact-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:48px;align-items:start}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr;gap:34px}}
+
+/* ---- Enquiry form card ---- */
+.cform{background:#fff;border:1px solid var(--border);border-radius:18px;padding:34px 36px;box-shadow:var(--shadow-sm)}
+@media(max-width:560px){.cform{padding:26px 22px}}
+.cform .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px 20px}
+@media(max-width:560px){.cform .fgrid{grid-template-columns:1fr}}
+.cform .field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.cform .field.full{grid-column:1 / -1}
+.cform label{font-size:13px;font-weight:600;color:var(--ink-900)}
+.cform label .req{color:var(--accent-strong);margin-left:2px}
+.cform label .opt{color:var(--fg-subtle);font-weight:500;font-size:11.5px;margin-left:5px}
+.cform input,.cform select,.cform textarea{font-family:var(--font-sans);font-size:15px;padding:12px 13px;border:1px solid var(--border-strong);border-radius:9px;background:#fff;color:var(--fg);width:100%;transition:border-color .15s ease,box-shadow .15s ease}
+.cform select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234e5d6b' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px}
+.cform textarea{min-height:118px;resize:vertical;line-height:1.55}
+.cform input:focus,.cform select:focus,.cform textarea:focus{outline:none;border-color:var(--plasma-500);box-shadow:0 0 0 3px rgba(207,138,43,.22)}
+.cform input::placeholder,.cform textarea::placeholder{color:var(--n-400)}
+
+/* treatment interest chips (checkbox group) */
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{position:relative;display:inline-flex}
+.chip input{position:absolute;inset:0;opacity:0;cursor:pointer;margin:0}
+.chip span{display:inline-flex;align-items:center;font-family:var(--font-sans);font-size:13.5px;font-weight:500;color:var(--ink-800);border:1px solid var(--border-strong);border-radius:999px;padding:9px 16px;cursor:pointer;transition:background .15s ease,color .15s ease,border-color .15s ease}
+.chip input:hover + span{border-color:var(--ink-700)}
+.chip input:checked + span{background:var(--ink-900);color:#fff;border-color:var(--ink-900)}
+.chip input:focus-visible + span{box-shadow:0 0 0 3px rgba(207,138,43,.28)}
+
+.cform .ftools{display:flex;flex-direction:column;gap:16px;margin-top:24px;padding-top:22px;border-top:1px solid var(--border)}
+.cform .fprivacy{font-size:12.5px;line-height:1.55;color:var(--fg-subtle);margin:0}
+.cform .fprivacy a{color:var(--ink-700)}
+.cform .ftools .btn{width:100%;justify-content:center;padding:15px}
+
+/* success state */
+.cform-done{display:none;flex-direction:column;align-items:center;text-align:center;padding:26px 16px 12px;gap:15px}
+.cform.is-done .cform-body{display:none}
+.cform.is-done .cform-done{display:flex}
+.cform-done .ci{width:58px;height:58px;border-radius:50%;background:var(--vital-50);color:var(--vital-600);display:flex;align-items:center;justify-content:center}
+.cform-done .ci svg{width:28px;height:28px}
+.cform-done h3{font-family:var(--font-display);font-weight:600;font-size:25px;color:var(--ink-900);margin:0}
+.cform-done p{font-size:15px;color:var(--fg-muted);margin:0;max-width:42ch;line-height:1.6}
+.cform-done .btn{margin-top:6px}
+
+/* ---- Aside: what to expect + direct booking ---- */
+.contact-aside{display:flex;flex-direction:column;gap:18px;position:sticky;top:96px}
+@media(max-width:900px){.contact-aside{position:static}}
+.ca-card{border:1px solid var(--border);border-radius:16px;padding:24px 26px;background:var(--bone)}
+.ca-card.ca-ink{background:var(--ink-900);border-color:var(--ink-900);color:#fff}
+.ca-card h3{font-family:var(--font-display);font-weight:500;font-size:19px;color:var(--ink-900);margin:0 0 16px;letter-spacing:-.01em}
+.ca-card.ca-ink h3{color:#fff}
+.ca-card .ca-eyebrow{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-strong);margin:0 0 9px}
+.ca-card.ca-ink .ca-eyebrow{color:var(--plasma-300)}
+.ca-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.ca-list li{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;line-height:1.5;color:var(--fg-muted)}
+.ca-list li svg{flex:none;margin-top:1px;width:17px;height:17px;color:var(--vital-600)}
+.ca-list li strong{color:var(--ink-900);font-weight:600;display:block;font-size:13.5px;margin-bottom:2px}
+.ca-card.ca-ink p{color:var(--fg-on-ink-mut);font-size:14px;line-height:1.6;margin:0 0 18px}
+.ca-card.ca-ink .btn{width:100%;justify-content:center}
+.ca-card.ca-ink .ca-note{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--fg-on-ink-mut);text-align:center;margin:12px 0 0}
+
+/* ---- Direct booking section (calendar embed) ---- */
+.book-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:46px;align-items:start}
+@media(max-width:860px){.book-grid{grid-template-columns:1fr;gap:30px}}
+.book-intro h2{font-family:var(--font-display);font-weight:500;font-size:clamp(1.7rem,1.2rem + 1.4vw,2.3rem);line-height:1.14;letter-spacing:-.02em;color:var(--ink-900);margin:14px 0 0}
+.book-intro p{font-size:1.0625rem;line-height:1.65;color:var(--fg-muted);margin:18px 0 0;max-width:42ch}
+.book-points{list-style:none;margin:24px 0 0;padding:0;display:flex;flex-direction:column;gap:14px}
+.book-points li{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;line-height:1.5;color:var(--ink-800)}
+.book-points li svg{flex:none;margin-top:2px;width:18px;height:18px;color:var(--vital-600)}
+.book-intro .btn{margin-top:26px}
+.book-frame{border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#fff;box-shadow:var(--shadow-md)}
+.book-frame iframe{width:100%;height:660px;border:0;display:block}
+.book-note{margin-top:14px;font-size:13px;color:var(--fg-subtle);display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.book-note svg{width:14px;height:14px;color:var(--fg-subtle)}
+.book-note a{color:var(--ink-700);font-weight:600;text-decoration:none}
+.book-note a:hover{color:var(--accent-strong)}
+@media(max-width:560px){.book-frame iframe{height:560px}}
+
+/* ============================================================================
+   BOULDER BIOLOGICS PARTNERS — Hybrid rebrand (overrides; site.css loads last)
+   Navy-led chrome, cyan→blue gradient signature, serif headlines. Accent scale
+   remapped amber → logo blue so every token-driven element recolors.
+   ========================================================================== */
+:root{
+  --plasma-700:#0a4170; --plasma-600:#0a5fa6; --plasma-500:#0d7fd1; --plasma-400:#2ea0e6;
+  --plasma-300:#74c4ef; --plasma-200:#bfe2f8; --plasma-100:#e2f1fc; --plasma-50:#f0f8fe;
+  --accent:#0d7fd1; --accent-strong:#0a5fa6; --accent-fg:#fff; --accent-wash:#e2f1fc;
+  --ring:color-mix(in oklch, #0d7fd1 55%, transparent);
+  --grad:linear-gradient(120deg,#19d3f4,#0d7fd1 58%,#154674);
+  --grad-bright:linear-gradient(120deg,#19d3f4,#0d7fd1);
+}
+::selection{background:#bfe2f8;color:var(--ink-950)}
+
+/* signature gradient devices */
+.gline{height:3px;width:60px;border-radius:3px;background:var(--grad-bright);margin-bottom:18px}
+.btn-accent{background:var(--grad-bright);color:#fff}
+.btn-accent:hover{background:linear-gradient(120deg,#0fc8ee,#0a6fc0)}
+.btn-accent .ar{color:#fff}
+
+/* brand logo (nav + footer) replaces the wordmark text */
+.brand{gap:0}
+.brand .brand-logo{height:60px;width:auto;display:block}
+.brand .wm,.brand .sub{display:none}
+.ftr .ftr-logo{height:30px;width:auto;display:block;margin-bottom:6px}
+.ftr .wm{display:none}
+
+/* header → navy, with a persistent gradient keyline beneath it */
+.hdr{position:sticky;background:rgba(15,35,54,.96);border-bottom:1px solid var(--border-ink)}
+.hdr::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--grad)}
+.hdr-in{height:88px}
+.nav a{color:var(--fg-on-ink)}
+.nav a:hover{color:var(--plasma-300)}
+.nav a[aria-current="page"]{color:var(--plasma-300)}
+.nav-toggle{border-color:var(--border-ink);color:#fff}
+.nav-toggle:hover{border-color:rgba(255,255,255,.5)}
+.m-nav{inset:91px 0 0;background:rgba(15,35,54,.98)}
+.m-nav a.navlink{color:#fff;border-bottom-color:var(--border-ink)}
+.m-nav a[aria-current="page"]{color:var(--plasma-300)}
+
+/* home hero is already ink — add the cyan glow + gradient highlight */
+.hero.hero-ink{position:relative;overflow:hidden}
+.hero.hero-ink::before{content:"";position:absolute;top:-170px;right:-110px;width:640px;height:540px;background:radial-gradient(circle at 70% 30%,rgba(25,211,244,.18),rgba(13,127,209,.08) 45%,transparent 70%);pointer-events:none}
+.hero.hero-ink .wrap{position:relative}
+.hero .eyebrow{color:var(--plasma-300)}
+.hero h1 .g{background:linear-gradient(120deg,#28e0ff,#74c4ef);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero.hero-ink .lead .lead-em{background:linear-gradient(120deg,#28e0ff,#74c4ef);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:700}
+
+/* dark-section stat figures → gradient */
+.statband .stat .n{background:linear-gradient(120deg,#28e0ff,#74c4ef);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.statband .stat .n .u{-webkit-text-fill-color:initial;color:var(--plasma-300)}
+
+/* light "bone" sections → clearly cooler tint + crisp seams so adjacent
+   light bands read as distinct (was too close to plain white) */
+.sec-bone{background:linear-gradient(180deg,#dbe9f7,#e8f0f7);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+
+/* CTA gradient keyline */
+.cta::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad)}
+
+/* footer → navy */
+.ftr{background:#0a1726;border-top:0;padding:48px 0 40px}
+.ftr .loc{color:var(--fg-on-ink-mut)}
+.ftr-cols h5{color:#5e6f7e}
+.ftr-cols a{color:var(--fg-on-ink-mut)}
+.ftr-cols a:hover{color:#fff}
+.ftr-disc{color:#5b6b7a}
+.ftr-clinic{display:inline-block;margin-top:16px;max-width:280px;font-size:13px;line-height:1.55;color:var(--fg-on-ink-mut);text-decoration:none}
+.ftr-clinic strong{color:var(--plasma-300);font-weight:600}
+.ftr-clinic:hover{color:#fff}
+.ftr-clinic:hover strong{color:#fff}
+.phero.on-ink .psub a{color:var(--plasma-300);text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px}
+.phero.on-ink .psub a:hover{color:#fff}
+
+/* leftover amber rgba tints → blue */
+.svc-lead .ic{background:rgba(116,196,239,.14)}
+.cform input:focus,.cform select:focus,.cform textarea:focus{border-color:var(--plasma-500);box-shadow:0 0 0 3px rgba(13,127,209,.22)}
+.chip input:focus-visible + span{box-shadow:0 0 0 3px rgba(13,127,209,.28)}
+
+/* "your choice" callout → bold navy with gradient edge + cyan check (per review) */
+.proc-choice{background:var(--ink-900);border-color:var(--ink-900);color:var(--fg-on-ink);position:relative;overflow:hidden;padding-left:26px}
+.proc-choice::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--grad)}
+.proc-choice svg{color:#28e0ff}
+.proc-choice strong{color:#fff}
+.proc-choice a{color:var(--plasma-300);font-weight:600}
+.proc-choice a:hover{color:#fff}
+
+/* comparison matrix: room for the 3-word brand under the corner pill */
+.matrix thead th{height:140px}
+.matrix .opt .oname{font-size:13.5px;line-height:1.22}
+.matrix .topcap{top:13px}
