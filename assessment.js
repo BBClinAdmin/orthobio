@@ -67,13 +67,15 @@
   };
 
   // Each category = 2 scored questions, 0–6 points. Sums to the same 36 total.
+  // `link` points at the on-site page/section that speaks to closing that gap.
+  var ROADMAP = "how-to-add-autologous-biologics.html";
   var categories = [
-    { key: "market", label: "Market Opportunity", qs: ["q1", "q2"] },
-    { key: "technique", label: "Clinical Technique", qs: ["q3", "q4"] },
-    { key: "facilities", label: "Facilities & Space", qs: ["q5", "q6"] },
-    { key: "equipment", label: "Equipment", qs: ["q7", "q8"] },
-    { key: "operations", label: "Operations & Quality", qs: ["q9", "q10"] },
-    { key: "commitment", label: "Commitment & Timing", qs: ["q11", "q12"] }
+    { key: "market", label: "Market Opportunity", qs: ["q1", "q2"], link: "the-challenge.html" },
+    { key: "technique", label: "Clinical Technique", qs: ["q3", "q4"], link: ROADMAP + "#training" },
+    { key: "facilities", label: "Facilities & Space", qs: ["q5", "q6"], link: ROADMAP + "#facility" },
+    { key: "equipment", label: "Equipment", qs: ["q7", "q8"], link: ROADMAP + "#equipment" },
+    { key: "operations", label: "Operations & Quality", qs: ["q9", "q10"], link: ROADMAP + "#sops" },
+    { key: "commitment", label: "Commitment & Timing", qs: ["q11", "q12"], link: ROADMAP + "#timeline" }
   ];
 
   // --- State -----------------------------------------------------------------
@@ -89,13 +91,13 @@
   function icons() { if (window.lucide && window.lucide.createIcons) window.lucide.createIcons({ attrs: { "stroke-width": 1.75 } }); }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function tierFor(score) { return score >= 26 ? "launch_ready" : score >= 15 ? "building" : "foundation"; }
-  function catStatus(s) { return s >= 5 ? { key: "strong", label: "Strong" } : s >= 3 ? { key: "building", label: "Building" } : { key: "early", label: "Early" }; }
+  function catStatus(s) { return s >= 5 ? { key: "strong", label: "We'll refine" } : s >= 3 ? { key: "building", label: "We'll strengthen" } : { key: "early", label: "We'll build" }; }
 
   function scoreCategories() {
     return categories.map(function (c) {
       var s = c.qs.reduce(function (sum, qk) { return sum + ((state.answers[qk] && state.answers[qk].points) || 0); }, 0);
       var st = catStatus(s);
-      return { key: c.key, label: c.label, score: s, status: st.key, statusLabel: st.label };
+      return { key: c.key, label: c.label, link: c.link, score: s, status: st.key, statusLabel: st.label };
     });
   }
 
@@ -263,11 +265,15 @@
           '<div class="as-meter"><span class="is-' + c.status + '" style="width:' + Math.round(c.score / 6 * 100) + '%"></span></div>' +
         "</div>";
     }).join("");
-    var focusHtml = focus.items.length
-      ? '<div class="as-focus"><i data-lucide="target"></i><div><strong>' + esc(focus.lead) + "</strong>" +
-          esc(joinList(focus.items.map(function (c) { return c.label; }))) + ".</div></div>"
-      : '<div class="as-focus"><i data-lucide="circle-check"></i><div><strong>' + esc(focus.lead) + "</strong>" +
-          "The foundation is largely in place — the next step is a focused implementation plan.</div></div>";
+    var focusHtml;
+    if (focus.items.length) {
+      var linked = focus.items.map(function (c) { return '<a href="' + c.link + '">' + esc(c.label) + "</a>"; });
+      focusHtml = '<div class="as-focus"><i data-lucide="target"></i><div><strong>' + esc(focus.lead) + "</strong>" +
+        "Learn how we help close " + joinList(linked) + ".</div></div>";
+    } else {
+      focusHtml = '<div class="as-focus"><i data-lucide="circle-check"></i><div><strong>' + esc(focus.lead) + "</strong>" +
+        'The foundation is largely in place — <a href="how-it-works.html">see how the engagement works</a>.</div></div>';
+    }
     app.innerHTML =
       '<div class="as-result">' +
         '<div class="as-badge"><i data-lucide="check"></i>Your readiness: ' + esc(r.label) + "</div>" +
