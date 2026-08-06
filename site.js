@@ -104,11 +104,62 @@
     bars.forEach(function (b) { io.observe(b); });
   }
 
+  // ---- Contact form: AJAX submit to Formspree, then reveal the success state ----
+  function wireContactForm() {
+    var form = document.getElementById("contact-form");
+    if (!form) return;
+    var card = form.closest(".cform");
+    var btn = form.querySelector("button[type=submit]");
+    var btnHTML = btn ? btn.innerHTML : "";
+
+    // Lazily-created inline error line, dropped into the form's tools row.
+    var err = document.createElement("p");
+    err.className = "fprivacy";
+    err.style.color = "var(--accent-strong)";
+    err.style.display = "none";
+    err.setAttribute("role", "alert");
+    var tools = form.querySelector(".ftools");
+    if (tools) tools.appendChild(err);
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      err.style.display = "none";
+      // The form carries `novalidate`, so trigger constraint checks ourselves.
+      if (typeof form.reportValidity === "function" && !form.reportValidity()) return;
+      if (btn) { btn.disabled = true; btn.innerHTML = "Sending…"; }
+
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" }
+      }).then(function (res) {
+        if (res.ok) {
+          if (card) card.classList.add("is-done");
+          drawIcons(); // render the check icon in the revealed success panel
+          if (card && card.scrollIntoView) card.scrollIntoView({ behavior: "smooth", block: "start" });
+          return;
+        }
+        return res.json().then(function (data) {
+          var msg = data && data.errors && data.errors.length
+            ? data.errors.map(function (x) { return x.message; }).join(", ")
+            : "Something went wrong sending your message.";
+          throw new Error(msg);
+        });
+      }).catch(function (e2) {
+        err.textContent = (e2 && e2.message ? e2.message : "Something went wrong.") +
+          " Please try again, or email admin@boulderbiologics.com.";
+        err.style.display = "";
+        if (btn) { btn.disabled = false; btn.innerHTML = btnHTML; }
+      });
+    });
+  }
+
   function init() {
     wireBooking();
     wireMobileNav();
     wireRevenueBars();
     wirePaybackBars();
+    wireContactForm();
   }
   if (document.readyState !== "loading") init();
   else document.addEventListener("DOMContentLoaded", init);
