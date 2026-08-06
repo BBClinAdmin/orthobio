@@ -61,6 +61,25 @@
     .as-result .btn{margin-top:6px}
     .as-followup{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--fg-subtle);margin:4px 0 0}
     .as-followup svg{width:16px;height:16px;flex:0 0 auto}
+
+    /* category breakdown */
+    .as-cats{display:flex;flex-direction:column;gap:15px;width:100%;margin:6px 0 2px}
+    .as-cat{display:flex;flex-direction:column;gap:8px}
+    .as-cat-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .as-cat-name{font-size:14.5px;font-weight:600;color:var(--ink-900)}
+    .as-cat-badge{font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:3px 9px;border-radius:var(--r-pill);white-space:nowrap}
+    .as-cat-badge.is-strong{background:var(--vital-50);color:var(--vital-600)}
+    .as-cat-badge.is-building{background:var(--accent-wash);color:var(--accent-strong)}
+    .as-cat-badge.is-early{background:var(--danger-bg);color:var(--danger)}
+    .as-meter{height:9px;background:var(--n-100);border-radius:var(--r-pill);overflow:hidden}
+    .as-meter>span{display:block;height:100%;border-radius:var(--r-pill);transition:width .55s cubic-bezier(.22,1,.36,1)}
+    .as-meter>span.is-strong{background:var(--vital-600)}
+    .as-meter>span.is-building{background:var(--accent)}
+    .as-meter>span.is-early{background:var(--danger)}
+    .as-focus{display:flex;gap:11px;align-items:flex-start;background:var(--bone);border:1px solid var(--border);border-radius:12px;padding:15px 17px;width:100%;margin-top:6px}
+    .as-focus svg{width:19px;height:19px;color:var(--accent);flex:0 0 auto;margin-top:1px}
+    .as-focus strong{display:block;color:var(--ink-900);font-size:14px;margin-bottom:2px}
+    .as-focus div{font-size:14px;color:var(--fg-muted);line-height:1.5}
   </style>
 </head>
 <body data-screen-label="Readiness Assessment">

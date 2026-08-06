@@ -66,6 +66,16 @@
     foundation: { label: "Foundation", body: "You are earlier in the journey, which is completely fine. The value of a conversation now is understanding what a full build actually involves, the equipment, the space, the protocols, and the training, so you can plan it properly rather than piece it together. We will be honest about what your practice realistically needs before you commit to anything." }
   };
 
+  // Each category = 2 scored questions, 0–6 points. Sums to the same 36 total.
+  var categories = [
+    { key: "market", label: "Market Opportunity", qs: ["q1", "q2"] },
+    { key: "technique", label: "Clinical Technique", qs: ["q3", "q4"] },
+    { key: "facilities", label: "Facilities & Space", qs: ["q5", "q6"] },
+    { key: "equipment", label: "Equipment", qs: ["q7", "q8"] },
+    { key: "operations", label: "Operations & Quality", qs: ["q9", "q10"] },
+    { key: "commitment", label: "Commitment & Timing", qs: ["q11", "q12"] }
+  ];
+
   // --- State -----------------------------------------------------------------
   var app = document.getElementById("assessment-app");
   if (!app) return;
@@ -79,6 +89,31 @@
   function icons() { if (window.lucide && window.lucide.createIcons) window.lucide.createIcons({ attrs: { "stroke-width": 1.75 } }); }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function tierFor(score) { return score >= 26 ? "launch_ready" : score >= 15 ? "building" : "foundation"; }
+  function catStatus(s) { return s >= 5 ? { key: "strong", label: "Strong" } : s >= 3 ? { key: "building", label: "Building" } : { key: "early", label: "Early" }; }
+
+  function scoreCategories() {
+    return categories.map(function (c) {
+      var s = c.qs.reduce(function (sum, qk) { return sum + ((state.answers[qk] && state.answers[qk].points) || 0); }, 0);
+      var st = catStatus(s);
+      return { key: c.key, label: c.label, score: s, status: st.key, statusLabel: st.label };
+    });
+  }
+
+  // Weakest areas first: flag Early (0–2) categories; if none, the lowest Building (3–4).
+  function focusFrom(cats) {
+    var asc = cats.slice().sort(function (a, b) { return a.score - b.score; });
+    var early = asc.filter(function (c) { return c.score <= 2; });
+    if (early.length) return { lead: "Your biggest gaps right now", items: early.slice(0, 3) };
+    var building = asc.filter(function (c) { return c.score <= 4; });
+    if (building.length) return { lead: "Worth strengthening next", items: building.slice(0, 2) };
+    return { lead: "You're strong across the board", items: [] };
+  }
+
+  function joinList(arr) {
+    if (arr.length <= 1) return arr[0] || "";
+    if (arr.length === 2) return arr[0] + " and " + arr[1];
+    return arr.slice(0, -1).join(", ") + ", and " + arr[arr.length - 1];
+  }
 
   // --- Render ----------------------------------------------------------------
   function render() {
@@ -176,14 +211,23 @@
     var total = 0;
     scored.forEach(function (q) { total += (state.answers[q.key] && state.answers[q.key].points) || 0; });
     var tier = tierFor(total);
+    var cats = scoreCategories();
+    var focus = focusFrom(cats);
 
+    var ans = function (k) { return (state.answers[k] && state.answers[k].label) || "(no answer)"; };
+    // Keys become the field labels in the Formspree email, so use readable text.
     var payload = {
-      name: name, email: email, _replyto: email, practice_name: practice, phone: phone,
-      total_score: total, tier: tier,
-      _subject: "New readiness assessment: " + (practice || "(no practice)") + " (" + tier + ")"
+      "Name": name,
+      "Work email": email,
+      _replyto: email,
+      "Practice name": practice,
+      "Phone": phone || "(not provided)",
+      "Readiness tier": results[tier].label + " — " + total + "/36",
+      "Category scores": cats.map(function (c) { return c.label + " " + c.score + "/6 (" + c.statusLabel + ")"; }).join("  ·  "),
+      _subject: "New readiness assessment: " + (practice || "(no practice)") + " — " + results[tier].label
     };
-    profiling.forEach(function (q) { payload[q.key] = (state.answers[q.key] && state.answers[q.key].label) || ""; });
-    scored.forEach(function (q) { payload[q.key] = (state.answers[q.key] && state.answers[q.key].label) || ""; });
+    profiling.forEach(function (q, i) { payload["P" + (i + 1) + ". " + q.text] = ans(q.key); });
+    scored.forEach(function (q, i) { payload["Q" + (i + 1) + ". " + q.text] = ans(q.key); });
 
     var btn = document.getElementById("as-submit");
     btn.disabled = true; btn.textContent = "Sending…";
@@ -193,7 +237,7 @@
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify(payload)
     }).then(function (res) {
-      if (res.ok) { showResults(tier); return; }
+      if (res.ok) { showResults(tier, cats, focus); return; }
       return res.json().then(function (data) {
         var m = data && data.errors && data.errors.length
           ? data.errors.map(function (x) { return x.message; }).join(", ")
@@ -208,13 +252,29 @@
     });
   }
 
-  function showResults(tier) {
+  function showResults(tier, cats, focus) {
     var r = results[tier];
+    var meters = cats.map(function (c) {
+      return '<div class="as-cat">' +
+          '<div class="as-cat-top">' +
+            '<span class="as-cat-name">' + esc(c.label) + "</span>" +
+            '<span class="as-cat-badge is-' + c.status + '">' + esc(c.statusLabel) + "</span>" +
+          "</div>" +
+          '<div class="as-meter"><span class="is-' + c.status + '" style="width:' + Math.round(c.score / 6 * 100) + '%"></span></div>' +
+        "</div>";
+    }).join("");
+    var focusHtml = focus.items.length
+      ? '<div class="as-focus"><i data-lucide="target"></i><div><strong>' + esc(focus.lead) + "</strong>" +
+          esc(joinList(focus.items.map(function (c) { return c.label; }))) + ".</div></div>"
+      : '<div class="as-focus"><i data-lucide="circle-check"></i><div><strong>' + esc(focus.lead) + "</strong>" +
+          "The foundation is largely in place — the next step is a focused implementation plan.</div></div>";
     app.innerHTML =
       '<div class="as-result">' +
         '<div class="as-badge"><i data-lucide="check"></i>Your readiness: ' + esc(r.label) + "</div>" +
         "<h2>Here is where your practice stands.</h2>" +
         "<p>" + esc(r.body) + "</p>" +
+        '<div class="as-cats">' + meters + "</div>" +
+        focusHtml +
         '<a class="btn btn-accent" href="' + BOOKING_URL + '" target="_blank" rel="noopener" data-book>' +
           'Book a discovery call <span class="ar">→</span></a>' +
         '<p class="as-followup"><i data-lucide="message-circle"></i>We will also follow up personally to answer any questions.</p>' +
