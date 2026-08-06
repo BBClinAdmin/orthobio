@@ -43,6 +43,17 @@
   <meta name="twitter:title" content="Boulder Biologics Partners — Build an autologous biologics program you fully own">
   <meta name="twitter:description" content="Boulder Biologics Partners helps established medical practices build a high-quality autologous biologics (orthobiologics) program from the ground up — no franchise, no protocol lock-in, no brand dependency. Partnering with practices across the U.S.">
   <meta name="twitter:image" content="https://www.boulderbiologics.net/assets/og-share.png">
+
+  <style>
+    /* Patient reviews (clinic social proof) — minimal, uses existing site tokens */
+    .reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;margin-top:6px}
+    .review{background:#fff;border:1px solid var(--border);border-radius:16px;padding:26px 28px;box-shadow:var(--shadow-sm)}
+    .review .stars{color:#f5a623;font-size:15px;letter-spacing:3px;margin-bottom:14px}
+    .review blockquote{margin:0;font-family:var(--font-sans);font-size:16px;line-height:1.62;color:var(--fg)}
+    .review .rev-by{margin-top:16px;display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--fg-subtle)}
+    .review .rev-by strong{color:var(--ink-900);font-weight:600}
+    .reviews-more{margin-top:22px}
+  </style>
 </head>
 <body data-screen-label="Home">
 
@@ -387,6 +398,38 @@
             <span class="pt-disc">Not a guarantee. Each practice sets prices and owns the financials.</span>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ===== Patient reviews (clinic social proof) =====
+         Real, verbatim Google reviews of the Boulder Biologics CLINIC (patients), framed as such — NOT
+         consulting-client testimonials. Trimmed only for length (meaning unchanged); names shortened to
+         first name + last initial. TODO(Rob): add the clinic's Google reviews URL for the "Read more" link. -->
+    <section class="sec sec-bone">
+      <div class="wrap">
+        <div class="sec-head">
+          <span class="eyebrow">What patients say</span>
+          <h2>Patients on the Boulder Biologics clinic.</h2>
+          <p>Verified Google reviews from patients treated at Boulder Biologics — the clinic behind the people who'll build your program.</p>
+        </div>
+        <div class="reviews-grid">
+          <div class="review">
+            <div class="stars" aria-label="Rated 5 out of 5">★★★★★</div>
+            <blockquote>"Dr. Glowney and Ryan were an absolute delight to work with — incredibly intelligent and compassionate providers. After struggling to find success with post-surgical stiffness and pain in my ankle, their treatments worked wonders. I now don't think about my ankle at all while I run, ski, hike, play basketball, and play tennis."</blockquote>
+            <div class="rev-by"><i data-lucide="badge-check" style="width:15px;height:15px;color:var(--accent)"></i><span><strong>Henry L.</strong> · Google review</span></div>
+          </div>
+          <div class="review">
+            <div class="stars" aria-label="Rated 5 out of 5">★★★★★</div>
+            <blockquote>"Dr. Glowney, Ryan, and Dawn have made every visit to Boulder Biologics superior to any other doctor's office. The team is so knowledgeable, caring, and thorough. They are completely honest, instead of giving you false expectations. The client education is top notch!"</blockquote>
+            <div class="rev-by"><i data-lucide="badge-check" style="width:15px;height:15px;color:var(--accent)"></i><span><strong>Lilli B.</strong> · Google review</span></div>
+          </div>
+          <div class="review">
+            <div class="stars" aria-label="Rated 5 out of 5">★★★★★</div>
+            <blockquote>"This office as a whole truly cares about their patients. Everyone I've been treated by has been incredibly kind, informative, and helpful. They look at you as a whole to get to the root of the problem instead of just pinpoint treating where you think hurts. Appointment times are nice and long, and every problem area is carefully reviewed by ultrasound. I felt heard, seen, and valued as a person."</blockquote>
+            <div class="rev-by"><i data-lucide="badge-check" style="width:15px;height:15px;color:var(--accent)"></i><span><strong>Mandy F.</strong> · Google review</span></div>
+          </div>
+        </div>
+        <!-- TODO(Rob): add a "Read more reviews on Google →" link here once you provide the clinic's Google reviews URL. -->
       </div>
     </section>
 
