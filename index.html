@@ -108,7 +108,10 @@
           </a>
           <div class="hero-note">
             <i data-lucide="circle-check" class="i-vital" stroke-width="2" style="width:15px;height:15px"></i>
-            <span>Built by the team behind <a href="https://boulderbiologics.com" target="_blank" rel="noopener">Boulder Biologics</a> — a nationally recognized autologous biologics clinic.</span>
+            <!-- TODO(Rob): "nationally recognized" was an unsupported superlative and has been softened to a defensible
+                 statement of fact. If specific recognition or media coverage exists (SPECIFIC_RECOGNITION_OR_MEDIA),
+                 cite it here — with a link where possible — and a stronger, sourced claim can be restored. -->
+            <span>Built by the team behind <a href="https://boulderbiologics.com" target="_blank" rel="noopener">Boulder Biologics</a> — an active, specialized autologous biologics clinic.</span>
           </div>
         </div>
         <div class="proof">
@@ -117,8 +120,8 @@
           </div>
           <div class="pbody">
             <h3>Led by Dr. Jason Glowney</h3>
-            <p>Board-certified, with thousands of his own patients treated across PRP,
-              prolotherapy, and BMAC — hands-on experience delivering results every day.</p>
+            <p>Board-certified in Internal Medicine and Sports Medicine (CAQSM), with 10+ years post-fellowship and
+              thousands of his own patients treated across PRP, prolotherapy, and BMAC.</p>
           </div>
         </div>
       </div>
@@ -302,6 +305,25 @@
       </div>
     </section>
 
+    <!-- ===== Clinic track record (credibility strip) =====
+         Draws on the Boulder Biologics clinic, using the existing .statband component.
+         TODO(Rob): Replace the ALL_CAPS placeholders below with confirmed, REAL figures before
+         publishing. Delete any .stat you cannot substantiate. Do NOT publish placeholder values. -->
+    <section class="sec sec-ink">
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="teaser-kicker"><span class="eyebrow" style="color:var(--plasma-300)">The clinic behind us</span></div>
+          <h2 style="color:#fff">A working clinic — not a course.</h2>
+          <p style="color:var(--fg-on-ink-mut)">Everything we help you build, we run every day at Boulder Biologics.</p>
+        </div>
+        <div class="statband">
+          <div class="stat"><div class="n">—</div><div class="c">Years operating the Boulder Biologics clinic · <strong>TODO: YEARS_IN_OPERATION</strong></div></div>
+          <div class="stat"><div class="n">—</div><div class="c">Autologous biologic procedures performed · <strong>TODO: APPROX_PROCEDURES_PERFORMED</strong></div></div>
+          <div class="stat"><div class="n">—</div><div class="c">Patients treated across PRP, prolotherapy &amp; BMAC · <strong>TODO: NUMBER_OF_PATIENTS_TREATED</strong></div></div>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== Founders (teaser → founders.html) ===== -->
     <section class="sec">
       <div class="wrap">
@@ -317,7 +339,7 @@
             <div>
               <h3>Dr. Jason Glowney</h3>
               <div class="role">Clinical Authority &amp; Lead Trainer</div>
-              <p>Board-certified in Internal Medicine and Sports Medicine, with thousands of his own patients treated across PRP, prolotherapy, and BMAC. Founder of Boulder Biologics.</p>
+              <p>Board-certified in Internal Medicine and Sports Medicine (CAQSM), with 10+ years post-fellowship and thousands of his own patients treated across PRP, prolotherapy, and BMAC. Founder of Boulder Biologics.</p>
             </div>
           </div>
           <div class="fcard">
@@ -368,6 +390,53 @@
         </div>
       </div>
     </section>
+
+    <!-- ===== Client results / testimonials (social proof) — HIDDEN until real references exist =====
+         TODO(Rob): There are no client testimonials yet, so this section is intentionally commented out and
+         renders nothing. When you have 1–3 REAL client references who have approved being quoted, fill the
+         placeholders, uncomment the <section>, and verify each quote is accurate and approved. The markup below
+         is a plain starting point — it may need styling. Do NOT publish fabricated or unapproved testimonials.
+
+    <section class="sec sec-bone">
+      <div class="wrap">
+        <div class="sec-head">
+          <span class="eyebrow">In their words</span>
+          <h2>What partner practices say.</h2>
+        </div>
+        <div class="testi-grid">
+          <blockquote class="testi">
+            <p>"CLIENT_QUOTE_1"</p>
+            <footer>CLIENT_NAME_1 — CLIENT_ROLE_1, CLIENT_PRACTICE_1</footer>
+          </blockquote>
+          <blockquote class="testi">
+            <p>"CLIENT_QUOTE_2"</p>
+            <footer>CLIENT_NAME_2 — CLIENT_ROLE_2, CLIENT_PRACTICE_2</footer>
+          </blockquote>
+          <blockquote class="testi">
+            <p>"CLIENT_QUOTE_3"</p>
+            <footer>CLIENT_NAME_3 — CLIENT_ROLE_3, CLIENT_PRACTICE_3</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+    -->
+
+    <!-- ===== Trust markers / affiliations — HIDDEN until each is confirmed =====
+         TODO(Rob): List only REAL, verifiable associations, certifications, or credentials (e.g. professional
+         society memberships, lab/clinic certifications, registrations). Confirm EACH before publishing, then
+         uncomment. Delete this block if there are none to cite. Do NOT invent affiliations.
+
+    <section class="sec">
+      <div class="wrap">
+        <div class="sec-head"><span class="eyebrow">Credentials &amp; affiliations</span></div>
+        <ul>
+          <li>ASSOCIATION_OR_CERT_1</li>
+          <li>ASSOCIATION_OR_CERT_2</li>
+          <li>ASSOCIATION_OR_CERT_3</li>
+        </ul>
+      </div>
+    </section>
+    -->
 
     <!-- ===== CTA band ===== -->
     <section class="cta-band cta-band-sep">
