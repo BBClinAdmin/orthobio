@@ -3,7 +3,7 @@
    with the site's own components. Submits to the shared Formspree form; the
    distinct _subject keeps assessment leads triageable in the inbox. */
 (function () {
-  var FORMSPREE_ENDPOINT = "https://formspree.io/f/xjybkgdd";
+  var FORMSPREE_ENDPOINT = "https://formspree.io/f/xljryrkq";
   var BOOKING_URL = "https://calendar.app.google/zTkZoBrUXyc5ng3PA";
 
   // --- Questions -------------------------------------------------------------
