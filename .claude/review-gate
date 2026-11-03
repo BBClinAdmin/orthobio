@@ -1,0 +1,1 @@
+Review gate (working rule C3): merges into main and pushes to main need Rob's yes; git-guard.sh enforces it.
