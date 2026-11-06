@@ -13,4 +13,4 @@ The piece that owns this site is `Website/handoff.md` in that project folder (wo
 ## The two things that bite
 
 - **A push is not a release.** Netlify builds from `main`, but auto-publishing is locked, so the deploy waits until Rob clicks Publish deploy in the site `gilded-dango-963fc0`. After pushing, say so and stop; do not poll the live site.
-- **Do not load boulderbiologics.net to check your work.** It is also Rob's internal Active Directory domain, so from his network it resolves to 10.x addresses and times out. Use `https://gilded-dango-963fc0.netlify.app`.
+- **Check your work on a preview, not the .net domain by default.** Use the local preview, or `https://gilded-dango-963fc0.netlify.app` once Rob has published. You may load `boulderbiologics.net`, but only if you confirm the response carries `server: Netlify` and an `x-nf-request-id` header. It is also Rob's internal Active Directory domain, and from his network it has resolved to 10.x addresses and timed out, so an internal answer must never be mistaken for the live site. If either header is missing, or the request times out, stop and use the netlify.app URL.
