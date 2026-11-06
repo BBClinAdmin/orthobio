@@ -3,8 +3,7 @@
 # /CLAUDE.md returned HTTP 200 on the live site until this rule. The ! is
 # required for the same reason as the host rules below: the file exists, and an
 # unforced rule is ignored in favour of serving it (verified on deploy preview 5).
-# Dotfiles
-# (.claude/*, .gitignore) are already refused by Netlify and need no rule.
+# Dotfiles (.claude/*, .gitignore) are already refused by Netlify and need no rule.
 /CLAUDE.md                       /404.html                                                              404!
 
 # Old paths — absolute targets so either host reaches the canonical page in one hop
