@@ -1,2 +1,8 @@
-# Terminology rename — preserve SEO / inbound links
-/how-to-add-orthobiologics.html  /how-to-add-autologous-biologics.html  301
+# Old paths — absolute targets so either host reaches the canonical page in one hop
+/slides/*                        https://boulderbiologics.net/how-it-works.html                     301
+/how-to-add-orthobiologics.html  https://boulderbiologics.net/how-to-add-autologous-biologics.html  301
+
+# Retired domain — everything left goes to the canonical host, path preserved.
+# The ! is required: the page files all exist, and without it Netlify serves the file instead of redirecting.
+http://orthobiopartners.com/*    https://boulderbiologics.net/:splat   301!
+https://orthobiopartners.com/*   https://boulderbiologics.net/:splat   301!
