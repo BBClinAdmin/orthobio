@@ -118,7 +118,19 @@
   }
 
   // --- Render ----------------------------------------------------------------
+  // GA4 funnel (2026-11-24): each step is recorded once, the first time it is
+  // reached, so going Back and forward again does not count twice.
+  function trackStep() {
+    var t = window.bbTrack;
+    if (typeof t !== "function" || state.step <= (state.maxTracked == null ? -1 : state.maxTracked)) return;
+    state.maxTracked = state.step;
+    if (state.step === 0) t("readiness_start", { page_path: location.pathname });
+    if (state.step < TOTAL) t("readiness_step", { step: state.step + 1, of: TOTAL });
+    else t("readiness_email_step", { page_path: location.pathname });
+  }
+
   function render() {
+    if (state.step >= 0) trackStep();
     if (state.step === -1) return renderIntro();
     if (state.step < TOTAL) return renderQuestion(state.step);
     return renderEmailGate();

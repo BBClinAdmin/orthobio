@@ -140,6 +140,14 @@
     var tools = form.querySelector(".ftools");
     if (tools) tools.appendChild(err);
 
+    // GA4: record once that someone began filling in the form.
+    var started = false;
+    form.addEventListener("input", function () {
+      if (started) return;
+      started = true;
+      track("contact_form_start", { page_path: location.pathname });
+    });
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       err.style.display = "none";
