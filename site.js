@@ -32,6 +32,25 @@
     });
   }
 
+  // ---- GA4 lead events (2026-11-24). Mark book_call_click and generate_lead
+  //      as key events in GA4. No names or emails are sent: page path and
+  //      which button or form only. ----
+  function track(name, params) {
+    if (typeof window.gtag === "function") window.gtag("event", name, params);
+  }
+  window.bbTrack = track;
+  // Delegated, so it also catches the booking button the readiness check
+  // renders after it finishes.
+  document.addEventListener("click", function (e) {
+    var el = e.target.closest ? e.target.closest("[data-book]") : null;
+    if (!el) return;
+    track("book_call_click", {
+      page_path: location.pathname,
+      cta_text: (el.textContent || "").replace(/\s+/g, " ").trim().slice(0, 60),
+      transport_type: "beacon"
+    });
+  });
+
   // ---- Mobile nav ----
   function wireMobileNav() {
     var toggle = document.querySelector(".nav-toggle");
@@ -134,6 +153,7 @@
         headers: { Accept: "application/json" }
       }).then(function (res) {
         if (res.ok) {
+          track("generate_lead", { lead_source: "contact_form", page_path: location.pathname });
           if (card) card.classList.add("is-done");
           drawIcons(); // render the check icon in the revealed success panel
           if (card && card.scrollIntoView) card.scrollIntoView({ behavior: "smooth", block: "start" });

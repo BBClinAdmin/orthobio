@@ -241,7 +241,12 @@
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify(payload)
     }).then(function (res) {
-      if (res.ok) { showResults(tier, cats, focus); return; }
+      if (res.ok) {
+        if (typeof window.bbTrack === "function") {
+          window.bbTrack("generate_lead", { lead_source: "readiness_check", page_path: location.pathname, readiness_tier: tier });
+        }
+        showResults(tier, cats, focus); return;
+      }
       return res.json().then(function (data) {
         var m = data && data.errors && data.errors.length
           ? data.errors.map(function (x) { return x.message; }).join(", ")
