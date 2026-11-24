@@ -118,7 +118,19 @@
   }
 
   // --- Render ----------------------------------------------------------------
+  // GA4 funnel (2026-11-24): each step is recorded once, the first time it is
+  // reached, so going Back and forward again does not count twice.
+  function trackStep() {
+    var t = window.bbTrack;
+    if (typeof t !== "function" || state.step <= (state.maxTracked == null ? -1 : state.maxTracked)) return;
+    state.maxTracked = state.step;
+    if (state.step === 0) t("readiness_start", { page_path: location.pathname });
+    if (state.step < TOTAL) t("readiness_step", { step: state.step + 1, of: TOTAL });
+    else t("readiness_email_step", { page_path: location.pathname });
+  }
+
   function render() {
+    if (state.step >= 0) trackStep();
     if (state.step === -1) return renderIntro();
     if (state.step < TOTAL) return renderQuestion(state.step);
     return renderEmailGate();
@@ -186,6 +198,7 @@
         field("as-email", "Work email", "email", true, "email") +
         field("as-practice", "Practice name", "text", true, "organization") +
         field("as-phone", "Phone", "tel", false, "tel") +
+        '<input type="text" name="_gotcha" id="as-gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">' +
       "</div>" +
       '<p class="as-err" id="as-err" role="alert" hidden></p>' +
       '<div class="as-row">' +
@@ -226,7 +239,8 @@
       "Phone": phone || "(not provided)",
       "Readiness tier": results[tier].label + " — " + total + "/36",
       "Category scores": cats.map(function (c) { return c.label + " " + c.score + "/6 (" + c.statusLabel + ")"; }).join("  ·  "),
-      _subject: "New readiness assessment: " + (practice || "(no practice)") + " — " + results[tier].label
+      _gotcha: val("as-gotcha"),
+      _subject: "New readiness check: " + (practice || "(no practice)") + " — " + results[tier].label
     };
     profiling.forEach(function (q, i) { payload["P" + (i + 1) + ". " + q.text] = ans(q.key); });
     scored.forEach(function (q, i) { payload["Q" + (i + 1) + ". " + q.text] = ans(q.key); });
@@ -239,7 +253,12 @@
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify(payload)
     }).then(function (res) {
-      if (res.ok) { showResults(tier, cats, focus); return; }
+      if (res.ok) {
+        if (typeof window.bbTrack === "function") {
+          window.bbTrack("generate_lead", { lead_source: "readiness_check", page_path: location.pathname, readiness_tier: tier });
+        }
+        showResults(tier, cats, focus); return;
+      }
       return res.json().then(function (data) {
         var m = data && data.errors && data.errors.length
           ? data.errors.map(function (x) { return x.message; }).join(", ")

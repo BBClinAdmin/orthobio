@@ -1,0 +1,72 @@
+# Netlify configuration: Boulder Biologics Partners site
+# Static site served from the repo root. The only build step strips internal
+# docs from the deploy and writes the IndexNow page manifest; there is no
+# compile or bundle stage.
+
+[build]
+  publish = "."
+  # `publish = "."` ships the whole repo, so CLAUDE.md (and any other root
+  # markdown file) would be publicly readable. `rm -f *.md` removes them from
+  # the build checkout only, never from the repo. The second half writes
+  # indexnow-manifest.json (one sha256 per sitemap URL) into the deploy; the
+  # scheduled function netlify/functions/indexnow.mjs reads the LIVE copy to
+  # tell IndexNow which pages changed. The _redirects rule for /CLAUDE.md
+  # stays as a second guard.
+  command = "rm -f *.md && node scripts/indexnow-manifest.mjs"
+
+# Node 22.12+ is required by @netlify/blobs (the IndexNow function).
+[build.environment]
+  NODE_VERSION = "22"
+
+# Scheduled function: every 15 minutes it compares the live manifest with the
+# last one stored in Netlify Blobs and submits only changed URLs to IndexNow.
+# Scheduled functions run only on the published production deploy, so nothing
+# is announced until Rob clicks Publish deploy.
+[functions]
+  directory = "netlify/functions"
+
+# The generated page list is for the scheduled function, not for search engines
+# or browser caches: it must always be the current published copy.
+[[headers]]
+  for = "/indexnow-manifest.json"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+    Cache-Control = "no-cache"
+
+# `publish = "."` ships the whole repo, so the build files below would be
+# publicly readable. Answer them with the 404 page instead. `force = true` is
+# required: Netlify ignores an unforced rule when a real file exists at the
+# path. Netlify processes the _redirects file first, then these rules. No
+# path rule in _redirects matches these paths; on the retired host
+# orthobiopartners.com the splat rules there fire first and 301 to the apex,
+# where these rules then answer 404.
+[[redirects]]
+  from = "/package.json"
+  to = "/404.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/package-lock.json"
+  to = "/404.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/netlify/*"
+  to = "/404.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/scripts/*"
+  to = "/404.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/node_modules/*"
+  to = "/404.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/netlify.toml"
+  to = "/404.html"
+  status = 404
+  force = true
