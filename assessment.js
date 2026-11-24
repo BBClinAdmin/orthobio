@@ -186,6 +186,7 @@
         field("as-email", "Work email", "email", true, "email") +
         field("as-practice", "Practice name", "text", true, "organization") +
         field("as-phone", "Phone", "tel", false, "tel") +
+        '<input type="text" name="_gotcha" id="as-gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">' +
       "</div>" +
       '<p class="as-err" id="as-err" role="alert" hidden></p>' +
       '<div class="as-row">' +
@@ -226,6 +227,7 @@
       "Phone": phone || "(not provided)",
       "Readiness tier": results[tier].label + " — " + total + "/36",
       "Category scores": cats.map(function (c) { return c.label + " " + c.score + "/6 (" + c.statusLabel + ")"; }).join("  ·  "),
+      _gotcha: val("as-gotcha"),
       _subject: "New readiness check: " + (practice || "(no practice)") + " — " + results[tier].label
     };
     profiling.forEach(function (q, i) { payload["P" + (i + 1) + ". " + q.text] = ans(q.key); });
