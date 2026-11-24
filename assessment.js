@@ -226,7 +226,7 @@
       "Phone": phone || "(not provided)",
       "Readiness tier": results[tier].label + " — " + total + "/36",
       "Category scores": cats.map(function (c) { return c.label + " " + c.score + "/6 (" + c.statusLabel + ")"; }).join("  ·  "),
-      _subject: "New readiness assessment: " + (practice || "(no practice)") + " — " + results[tier].label
+      _subject: "New readiness check: " + (practice || "(no practice)") + " — " + results[tier].label
     };
     profiling.forEach(function (q, i) { payload["P" + (i + 1) + ". " + q.text] = ans(q.key); });
     scored.forEach(function (q, i) { payload["Q" + (i + 1) + ". " + q.text] = ans(q.key); });

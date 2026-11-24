@@ -1,6 +1,6 @@
 # Orthobiologics Consulting: Boulder Biologics Partners site
 
-This repo is the whole of the Boulder Biologics Partners site at boulderbiologics.net: 13 hand-maintained HTML pages at the root, no build step, no framework. It is the only source for the site.
+This repo is the whole of the Boulder Biologics Partners site at boulderbiologics.net: 13 hand-maintained HTML pages at the root, no framework. The only build step (netlify.toml) strips *.md from the deploy and writes the IndexNow manifest; a Netlify scheduled function sends changed pages to IndexNow. It is the only source for the site.
 
 ## Project standard
 
